@@ -1,0 +1,62 @@
+[
+  {
+    "file": "01_项目概览",
+    "width": 3508,
+    "height": 2480,
+    "dpi": 300,
+    "groups": 6,
+    "layers": 37,
+    "textLayers": 27,
+    "bytes": 5601241
+  },
+  {
+    "file": "02_设计缘起",
+    "width": 3508,
+    "height": 2480,
+    "dpi": 300,
+    "groups": 5,
+    "layers": 44,
+    "textLayers": 29,
+    "bytes": 3412283
+  },
+  {
+    "file": "03_交互与表情",
+    "width": 3508,
+    "height": 2480,
+    "dpi": 300,
+    "groups": 4,
+    "layers": 61,
+    "textLayers": 34,
+    "bytes": 3715753
+  },
+  {
+    "file": "04_系统与性格",
+    "width": 3508,
+    "height": 2480,
+    "dpi": 300,
+    "groups": 5,
+    "layers": 59,
+    "textLayers": 37,
+    "bytes": 3745959
+  },
+  {
+    "file": "05_从零到一",
+    "width": 3508,
+    "height": 2480,
+    "dpi": 300,
+    "groups": 8,
+    "layers": 65,
+    "textLayers": 45,
+    "bytes": 5091141
+  },
+  {
+    "file": "06_成品与下一步",
+    "width": 3508,
+    "height": 2480,
+    "dpi": 300,
+    "groups": 6,
+    "layers": 40,
+    "textLayers": 28,
+    "bytes": 5734889
+  }
+]

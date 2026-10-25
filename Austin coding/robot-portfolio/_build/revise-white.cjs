@@ -1,0 +1,46 @@
+const fs=require('fs'),path=require('path');
+let s=fs.readFileSync(path.join(__dirname,'build.cjs'),'utf8');
+function rep(a,b){if(!s.includes(a))throw Error('Missing: '+a.slice(0,80));s=s.replace(a,b);}
+function block(start,end,b){const a=s.indexOf(start),z=s.indexOf(end,a);if(a<0||z<0)throw Error(start);s=s.slice(0,a)+b+'\n'+s.slice(z);}
+rep("const OUT=path.resolve(__dirname,'..');","const OUT=path.resolve(__dirname,'..','白底修订版');");
+s=s.replace(/const deps = [^;]+;/,"const deps = 'C:/Users/Administrator/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules';");
+rep("const C={bg:","const OLD_C={bg:");
+rep("const escape=","const C={bg:'#FFFFFF',ink:'#191919',muted:'#656565',line:'#D4D4D4',orange:'#96363C',pale:'#FFFFFF',sage:'#FFFFFF',white:'#FFFFFF',dark:'#252525',screen:'#FFFFFF'};\nconst escape=");
+rep("'暖白纸张'","'纯白纸张'");
+rep('rx="${r}"','rx="0"');
+rep("T(kicker,48,83,11,C.orange,true,'Arial')","T(kicker,48,83,11,C.muted,false,'Arial')");
+rep("T(heading,48,111,35,C.ink,true)","T(heading,48,111,33,C.ink,true)");
+block('function tag(', 'function arrow(', `function tag(s,x,y,w=90,fill=C.ink,color=C.bg){L(x,y+25,x+w,y+25,C.line);T(s,x,y+3,11,C.ink,true);}`);
+rep('c=C.ink){E(`<path d="M 2 10','c=C.ink){c=C.muted;E(`<path d="M 2 10');
+block('function photo(', 'function number(', `function photo(id,x,y,w,h,label,detail,dark=false){G(id+' / 照片占位（置入照片后隐藏说明）');R(x,y,w,h,'#FAFAFA',id+' / 照片底板',0,C.line);E(\`<path d="M 18 29 V 18 H 29 M \${w-29} 18 H \${w-18} V 29 M 18 \${h-29} V \${h-18} H 29 M \${w-29} \${h-18} H \${w-18} V \${h-29}" fill="none" stroke="#B7B7B7" stroke-width="1"/>\`,x,y,w,h,'裁切角标');T(id+' / IMAGE',x+26,y+22,10,C.muted,false,'Arial');L(x+26,y+h-86,x+w-26,y+h-86,C.line);T(label,x+26,y+h-72,Math.min(17,w/20),C.ink,false);P(detail,x+26,y+h-40,Math.min(11,w/30),C.muted,18);}`);
+// Cars are technical icons; the only colour is in the motion cue.
+rep('rx="${w*.2}" fill="${C.orange}"','rx="${w*.2}" fill="#9D9D9D"');
+block("G('01 / 封面标题');", "G('02 / 项目标签');", `G('01 / 封面标题');T('PRODUCT / INTERACTION DESIGN',49,91,10,C.muted,false,'Arial');L(49,127,432,127,C.ink);T('PIT PAL',44,157,76,C.ink,true,'Arial');T('车载情绪陪伴机器人',49,270,28,C.ink,true);T('A companion for everyday journeys',49,319,15,C.muted,false,'Arial');P(['从赛车模型出发，','探索车内的情绪陪伴。'],49,413,23,C.ink,39);P(['从童年的赛车模型，到家中简洁的特斯拉座舱，','我把“想做一辆赛车”的愿望，转化成一个','能聊天、会做表情、可以设定性格的车载机器人。'],49,551,13,C.muted,23);`);
+block("G('03 / 主视觉辅助图形');", "G('04 / 三项核心能力');", `G('03 / 主视觉图注');T('01 / FINISHED PROTOTYPE',500,520,11,C.muted,false,'Arial');`);
+rep("[['01','聊得来'],['02','有反应'],['03','懂你的个性']]","[['01','语音陪伴'],['02','运动反馈'],['03','性格设定']]");
+rep("T(a[1],x+31,713,18,C.ink,true)","T(a[1],x+31,713,16,C.ink,false)");
+rep('从喜欢赛车，到想让座舱有一点温度。','设计缘起：从个人兴趣到使用情境');
+rep("R(48,365,622,370,C.sage,'场景底');","L(48,365,670,365,C.line);L(48,735,670,735,C.line);");
+s=s.replaceAll('#8E9F89','#878787').replaceAll('#BBC6B6','#BEBEBE');
+rep('fill="${C.orange}"/><circle cx="21"','fill="#B5B5B5"/><circle cx="21"');
+rep('让它“感受到”车的动作。','交互设计：将车辆运动转化为表情');
+rep("R(x,222,202,324,i===1?C.pale:'#ECEDE6','交互栏底',9);","L(x,222,x+202,222,C.ink);L(x,546,x+202,546,C.line);");
+rep("R(x,629,251,85,i===3?C.ink:C.bg,'流程节点',6,C.line);","L(x,629,x+251,629,C.line);");
+rep("17,i===3?C.bg:C.ink,true","17,C.ink,true");
+rep("11,i===3?'#AFBDAA':C.muted","11,C.muted");
+rep('会聊天，也能长成你喜欢的性格。','系统设计：语音陪伴与性格配置');
+rep("R(n.x,n.y,n.w,n.h,i===1?C.orange:C.bg,'架构节点',7,i===1?null:C.line)","R(n.x,n.y,n.w,n.h,C.bg,'架构节点',0,C.line)");
+rep("17,i===1?C.white:C.ink,true","17,C.ink,true");rep("10,i===1?C.white:C.muted","10,C.muted");
+rep("R(48,448,409,90,C.sage,'运动输入模块',7)","R(48,448,409,90,C.bg,'运动输入模块',0,C.line)");
+block("G('03 / 对话样例');",'// 05', `G('03 / 对话样例');L(48,616,702,616,C.ink);T('CONVERSATION / 语气示例',48,635,10,C.muted,false,'Arial');T('你：今天有点累。',48,669,14,C.muted);T('它：收到，今天不赶圈速。先陪你把这段路慢慢走完。',48,703,15,C.ink);
+G('04 / 后台界面示意');R(752,223,390,525,C.white,'后台面板',0,C.line);T('PIT PAL',773,243,12,C.ink,true,'Arial');T('DEVICE SETTINGS',967,245,10,C.muted,false,'Arial');L(753,279,1140,279,C.line);T('性格配置',775,305,23,C.ink,true);T('交互界面示意 / 待替换为实际后台截图',775,344,10,C.muted);
+T('01',775,394,11,C.orange,false,'Arial');T('陪伴风格',802,390,13,C.ink,true);[['赛车搭子',true],['温柔陪伴',false],['冷幽默',false]].forEach((a,i)=>{let x=776+i*112;E(\`<circle cx="7" cy="7" r="6" fill="white" stroke="\${a[1]?C.ink:C.line}" stroke-width="1"/>\${a[1]?'<circle cx="7" cy="7" r="3" fill="#191919"/>':''}\`,x,431,14,14,'单选框');T(a[0],x+20,429,11,C.ink);});L(775,465,1118,465,C.line);
+T('02',775,485,11,C.orange,false,'Arial');T('活泼程度',802,481,13,C.ink,true);T('70 / 100',1061,483,10,C.muted,false,'Arial');L(777,527,1116,527,C.line,2);L(777,527,1009,527,C.ink,2);R(1005,521,8,13,C.ink,'滑杆游标');T('安静',775,543,10,C.muted);T('爱接话',1080,543,10,C.muted);L(775,573,1118,573,C.line);
+T('03',775,594,11,C.orange,false,'Arial');T('性格描述',802,590,13,C.ink,true);R(775,625,342,71,C.bg,'文字输入区域',0,C.line);P(['有点机灵、喜欢赛车梗；','在我疲惫时，语气更温柔一点。'],788,636,12,C.ink,23);T('示例配置 / 影响对话风格与回应方式',775,717,10,C.muted);
+`);
+rep('从电路到外壳，把想法真正做出来。','原型制作：从电路、结构到整机实现');
+rep("R(48,663,1095,91,C.sage,'迭代记录区',8);","L(48,663,1143,663,C.ink);L(48,754,1143,754,C.line);");
+rep('不只是一辆模型，更是路上的情绪搭子。','成品呈现与设计反思');
+rep("['PSD','预览','SVG源文件']","['PSD','预览','SVG源文件','_build']");
+rep("background:'#D8DBD3'","background:'#E8E8E8'");
+const dest=path.join(__dirname,'build-white.cjs');fs.writeFileSync(dest,s);require(dest);
